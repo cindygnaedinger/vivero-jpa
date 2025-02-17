@@ -18,6 +18,9 @@ public class Oficina {
     @Column(name = "id_oficina")
     private int idOficina;
 
+    @Column(name = "codigo_oficina")
+    private String codigoOficina;
+
     @Column(name = "ciudad", length = 50)
     private String ciudad;
 
@@ -45,6 +48,14 @@ public class Oficina {
 
     public void setIdOficina(int idOficina) {
         this.idOficina = idOficina;
+    }
+
+    public String getCodigoOficina() {
+        return codigoOficina;
+    }
+
+    public void setCodigoOficina(String codigoOficina) {
+        this.codigoOficina = codigoOficina;
     }
 
     public String getCiudad() {
