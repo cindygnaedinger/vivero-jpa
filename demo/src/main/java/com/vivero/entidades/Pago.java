@@ -26,10 +26,10 @@ public class Pago {
     private String formaPago;
 
     @Column(name = "id_transaccion")
-    private String idTransaccion;
+    private String idTransaccion; 
 
-    @Column(name = "id_transaccion")
-    private double total;
+    @Column(name = "total")
+    private double total; 
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
@@ -86,3 +86,4 @@ public class Pago {
     public Pago() {
     }
 }
+
