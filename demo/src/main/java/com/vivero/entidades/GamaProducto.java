@@ -14,7 +14,7 @@ public class GamaProducto {
     private int idGama;
 
     @Column(name = "descripcion_html")
-    private String descripcionHtml; // Corregí "descripcionHmtl" a "descripcionHtml"
+    private String descripcionHtml; 
 
     @Column(name = "descripcion_texto")
     private String descripcionTexto;

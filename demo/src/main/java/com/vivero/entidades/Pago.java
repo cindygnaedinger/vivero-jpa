@@ -1,6 +1,6 @@
 package com.vivero.entidades;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,8 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "pago")
@@ -21,9 +19,8 @@ public class Pago {
     @Column(name = "id_pago")
     private int idPago;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_pago")
-    private Date fechaPago;
+    private LocalDate fechaPago; 
 
     @Column(name = "forma_pago")
     private String formaPago;
@@ -46,11 +43,11 @@ public class Pago {
         this.idPago = idPago;
     }
 
-    public Date getFechaPago() {
+    public LocalDate getFechaPago() {
         return fechaPago;
     }
 
-    public void setFechaPago(Date fechaPago) {
+    public void setFechaPago(LocalDate fechaPago) {
         this.fechaPago = fechaPago;
     }
 
