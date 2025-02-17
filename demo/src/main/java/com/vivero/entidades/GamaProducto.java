@@ -1,11 +1,7 @@
 package com.vivero.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "gama_producto")
@@ -17,7 +13,7 @@ public class GamaProducto {
     private int idGama;
 
     @Column(name = "descripcion_html")
-    private String descripcionHmtl;
+    private String descripcionHtml; // Corregí "descripcionHmtl" a "descripcionHtml"
 
     @Column(name = "descripcion_texto")
     private String descripcionTexto;
@@ -39,12 +35,12 @@ public class GamaProducto {
         this.idGama = idGama;
     }
 
-    public String getDescripcionHmtl() {
-        return descripcionHmtl;
+    public String getDescripcionHtml() {
+        return descripcionHtml;
     }
 
-    public void setDescripcionHmtl(String descripcionHmtl) {
-        this.descripcionHmtl = descripcionHmtl;
+    public void setDescripcionHtml(String descripcionHtml) {
+        this.descripcionHtml = descripcionHtml;
     }
 
     public String getDescripcionTexto() {
@@ -71,3 +67,4 @@ public class GamaProducto {
         this.imagen = imagen;
     }
 }
+
