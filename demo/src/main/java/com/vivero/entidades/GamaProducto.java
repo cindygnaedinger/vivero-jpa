@@ -1,7 +1,6 @@
 package com.vivero.entidades;
 
 import jakarta.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "gama_producto")
