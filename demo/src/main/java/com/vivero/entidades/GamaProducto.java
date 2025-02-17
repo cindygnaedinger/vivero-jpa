@@ -1,5 +1,7 @@
 package com.vivero.entidades;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -22,6 +24,9 @@ public class GamaProducto {
 
     @Column(name = "imagen")
     private String imagen;
+
+    @OneToMany(mappedBy = "gama", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Producto> productos;
 
     public GamaProducto() {
     }
@@ -64,6 +69,14 @@ public class GamaProducto {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }
 
