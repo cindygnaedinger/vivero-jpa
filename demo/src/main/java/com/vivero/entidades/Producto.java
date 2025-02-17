@@ -43,7 +43,7 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "id_gama") 
-    private GamaProducto gamaProducto;
+    private GamaProducto gama;
 
     public Producto() {
     }
@@ -120,11 +120,11 @@ public class Producto {
         this.proveedor = proveedor;
     }
 
-    public GamaProducto getGamaProducto() {
-        return gamaProducto;
+    public GamaProducto getGama() {
+        return gama;
     }
 
-    public void setGamaProducto(GamaProducto gamaProducto) {
-        this.gamaProducto = gamaProducto;
+    public void setGama(GamaProducto gama) {
+        this.gama = gama;
     }
 }
