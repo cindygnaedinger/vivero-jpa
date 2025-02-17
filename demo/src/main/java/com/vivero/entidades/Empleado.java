@@ -32,7 +32,7 @@ public class Empleado {
     @Column(name = "id_jefe")
     private int idJefe;
 
-    @Column(name = "nombre", length = 10)
+    @Column(name = "nombre", length = 100)
     private String nombre;
 
     @Column(name = "puesto")
