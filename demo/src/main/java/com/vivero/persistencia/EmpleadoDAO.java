@@ -3,43 +3,66 @@ package com.vivero.persistencia;
 import com.vivero.entidades.Empleado;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 public class EmpleadoDAO {
-    
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ViveroPU");
-
-    private final EntityManager em = emf.createEntityManager();
-
     public void guardarEmpleado(Empleado empleado) throws Exception{
-        em.getTransaction().begin();
-        em.persist(empleado);
-        em.getTransaction().commit();
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(empleado);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            System.err.println("Error al guardar el empleado: " + e.getMessage());
+        } finally {
+            em.close();
+        }
     }
 
     public Empleado buscarEmpleadoPorId(int idEmpleado){
-        return em.find(Empleado.class, idEmpleado);
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            return em.find(Empleado.class, idEmpleado);
+        } catch (Exception e) {
+            System.err.println("Error al buscar el empleado con ID "+idEmpleado+": "+e.getMessage());
+            return null;
+        } finally {
+            em.close();
+        }
     }
 
     public void actualizarEmpleado(Empleado empleado) throws Exception{
-        em.getTransaction().begin();
-        em.merge(empleado);
-        em.getTransaction().commit();
-    }
-
-    public void eliminarEmpleado(int idEmpleado) throws Exception
-    {
-        em.getTransaction().begin();
-        Empleado empleado = em.find(Empleado.class, idEmpleado);
-        if(empleado != null){
-            em.remove(empleado);
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(empleado);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            System.err.println("Error al actualizar el empleado: " + e.getMessage());
+        } finally {
+            em.close();
         }
-        em.getTransaction().commit();
+        
     }
 
-    public void cerrar(){
-        em.close();
-        emf.close();
+    public void eliminarEmpleado(int idEmpleado){
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Empleado empleado = em.find(Empleado.class, idEmpleado);
+            if(empleado != null){
+                em.remove(empleado);
+                em.getTransaction().commit();
+            } else {
+                em.getTransaction().rollback();
+                System.err.println("No se encontró el empleado con ID "+idEmpleado);
+            }
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            System.err.println("Error al eliminar el empleado con ID "+idEmpleado+": "+e.getMessage());
+        } finally {
+            em.close();
+        }
     }
 }
