@@ -5,14 +5,10 @@ import java.util.List;
 import com.vivero.entidades.DetallePedido;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 public class DetallePedidoDAO {
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ViveroPU");
-    private final EntityManager em = emf.createEntityManager();
-
     public void guardarDetallePedido(DetallePedido detallePedido){
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(detallePedido);
@@ -20,28 +16,37 @@ public class DetallePedidoDAO {
         } catch (Exception e) {
             em.getTransaction().rollback();
             System.err.println("Error al guardar el detalle del pedido: " + e.getMessage());
+        } finally {
+            em.close();
         }
     }
 
     public DetallePedido buscarDetallePedidoPorId(int idDetallePedido) {
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.find(DetallePedido.class, idDetallePedido);
         } catch (Exception e) {
             System.err.println("Error al buscar el detalle del pedido con ID "+idDetallePedido+": "+e.getMessage());
             return null;
+        } finally {
+            em.close();
         }
     }
 
     public List<DetallePedido> buscarTodosLosDetallesPedidos(){
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.createQuery("SELECT d FROM detalle_pedido d", DetallePedido.class).getResultList();
         } catch (Exception e) {
             System.err.println("Error al obtener la lista de detalles de pedidos: " + e.getMessage());
             return null;
+        } finally {
+            em.close();
         }
     }
 
     public void actualizarDetallePedido(DetallePedido detallePedido){
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
             em.merge(detallePedido);
@@ -49,10 +54,13 @@ public class DetallePedidoDAO {
         } catch (Exception e) {
             em.getTransaction().rollback();
             System.err.println("Error al actualizar el detalle del pedido: "+ e.getMessage());
+        } finally {
+            em.close();
         }
     }
 
     public void eliminarDetallePedido(int idDetallePedido){
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
             DetallePedido detallePedido = em.find(DetallePedido.class, idDetallePedido);
@@ -66,19 +74,8 @@ public class DetallePedidoDAO {
         } catch (Exception e) {
             em.getTransaction().rollback();
             System.err.println("Error al eliminar el detalle del pedido con ID " + idDetallePedido+ ": "+ e.getMessage());
-        }
-    }
-
-    public void cerrar(){
-        try {
-            if(em.isOpen()){
-                em.close();
-            }
-            if(em.isOpen()){
-                em.close();
-            }
-        } catch (Exception e) {
-            System.err.println("Error al cerrar la conexión con la base de datos: "+e.getMessage());
+        } finally {
+            em.close();
         }
     }
 }
