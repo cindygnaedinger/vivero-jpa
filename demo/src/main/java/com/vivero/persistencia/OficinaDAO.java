@@ -3,16 +3,12 @@ package com.vivero.persistencia;
 import com.vivero.entidades.Oficina;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 public class OficinaDAO {
-    // primero: creo el entitymanagerfactory y el entitymanager
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ViveroPU");
-    private final EntityManager em = emf.createEntityManager();
-
+    // primero: creo el entitymanager y lo cierro al final de los metodos
     // segundo: creo el metodo persistir para guardar oficina en la base de datos
     public void guardarOficina(Oficina oficina) throws Exception{
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             // iniciar, persistir y confirmar transaccion
             em.getTransaction().begin();
@@ -24,11 +20,14 @@ public class OficinaDAO {
                 em.getTransaction().rollback();
             }
             throw new Exception("Error al guardar la oficina: "+e.getMessage(), e);
+        } finally {
+            em.close();
         }
     }
 
     // tercero: metodo para actualizar oficina
     public void actualizarOficina(Oficina oficina) throws Exception{
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             // iniciar, actualizar, confirmar
             em.getTransaction().begin();
@@ -39,11 +38,14 @@ public class OficinaDAO {
                 em.getTransaction().rollback();
             }
             throw new Exception("Error al actualizar la oficina: "+e.getMessage(), e);
+        } finally {
+            em.close();
         }
     }
 
     // cuarto: metodo para eliminar oficina
     public void eliminarOficina(int idOficina) throws Exception {
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             // busco la oficina por id
             Oficina oficina = em.find(Oficina.class, idOficina);
@@ -59,25 +61,21 @@ public class OficinaDAO {
                 em.getTransaction().rollback();
             }
             throw new Exception("Error al eliminar la oficina: "+e.getMessage(), e);
+        } finally {
+            em.close();
         }
     }
 
     // quinto: metodo para obtener una oficina por id
     public Oficina obtieneOficina(int idOficina) throws Exception{
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.find(Oficina.class, idOficina);
         } catch (Exception e) {
             throw new Exception("Error al obtener la oficina: "+e.getMessage(), e);
-        }
-    }
-
-    // sexto: cierro la conexion del entitymanager
-    public void cerrar(){
-        if(em.isOpen()){
+        } finally {
             em.close();
-        }
-        if(emf.isOpen()){
-            emf.close();
         }
     }
 }
+
