@@ -2,7 +2,6 @@ package com.vivero.persistencia;
 
 import java.util.List;
 
-import com.vivero.entidades.Empleado;
 import com.vivero.entidades.Oficina;
 
 import jakarta.persistence.EntityManager;
