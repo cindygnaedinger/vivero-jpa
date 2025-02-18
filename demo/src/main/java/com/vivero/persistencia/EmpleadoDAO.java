@@ -1,5 +1,8 @@
 package com.vivero.persistencia;
 
+import java.util.List;
+
+import com.vivero.entidades.DetallePedido;
 import com.vivero.entidades.Empleado;
 
 import jakarta.persistence.EntityManager;
@@ -61,6 +64,18 @@ public class EmpleadoDAO {
         } catch (Exception e) {
             em.getTransaction().rollback();
             System.err.println("Error al eliminar el empleado con ID "+idEmpleado+": "+e.getMessage());
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Empleado> buscarTodosLosEmpleados(){
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            return em.createQuery("SELECT e FROM Empleados e", Empleado.class).getResultList();
+        } catch (Exception e) {
+            System.err.println("Error al obtener la lista de empleados: " + e.getMessage());
+            return null;
         } finally {
             em.close();
         }

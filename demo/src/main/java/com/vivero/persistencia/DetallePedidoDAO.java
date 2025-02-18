@@ -36,7 +36,7 @@ public class DetallePedidoDAO {
     public List<DetallePedido> buscarTodosLosDetallesPedidos(){
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.createQuery("SELECT d FROM detalle_pedido d", DetallePedido.class).getResultList();
+            return em.createQuery("SELECT d FROM DetallePedido d", DetallePedido.class).getResultList();
         } catch (Exception e) {
             System.err.println("Error al obtener la lista de detalles de pedidos: " + e.getMessage());
             return null;

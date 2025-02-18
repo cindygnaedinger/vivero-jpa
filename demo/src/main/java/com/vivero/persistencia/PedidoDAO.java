@@ -1,6 +1,5 @@
 package com.vivero.persistencia;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.vivero.entidades.Pedido;
@@ -75,7 +74,7 @@ public class PedidoDAO {
             return em.createQuery("SELECT pe FROM Pedido pe", Pedido.class).getResultList();
         } catch (Exception e) {
            System.err.println("Error al listar los pedidos" + e.getMessage());
-           return new ArrayList<>();
+           return null;
         } finally {
             em.close();
         }

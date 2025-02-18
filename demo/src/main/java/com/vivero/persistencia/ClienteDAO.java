@@ -36,7 +36,7 @@ public class ClienteDAO {
     public List<Cliente> buscarTodosLosClientes(){
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.createQuery("SELECT c FROM cliente c", Cliente.class).getResultList();
+            return em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
         } catch (Exception e) {
             System.err.println("Error al buscar la lista de clientes: " + e.getMessage());
             return null;

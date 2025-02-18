@@ -1,5 +1,8 @@
 package com.vivero.persistencia;
 
+import java.util.List;
+
+import com.vivero.entidades.Empleado;
 import com.vivero.entidades.Oficina;
 
 import jakarta.persistence.EntityManager;
@@ -67,12 +70,24 @@ public class OficinaDAO {
     }
 
     // quinto: metodo para obtener una oficina por id
-    public Oficina obtieneOficina(int idOficina) throws Exception{
+    public Oficina buscarOficinaPorId(int idOficina) throws Exception{
         EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.find(Oficina.class, idOficina);
         } catch (Exception e) {
             throw new Exception("Error al obtener la oficina: "+e.getMessage(), e);
+        } finally {
+            em.close();
+        }
+    }
+    // quinto: metodo para buscar todas las oficinas
+    public List<Oficina> buscarTodasLasOficinas(){
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            return em.createQuery("SELECT o FROM Oficina o", Oficina.class).getResultList();
+        } catch (Exception e) {
+            System.err.println("Error al obtener la lista de empleados: " + e.getMessage());
+            return null;
         } finally {
             em.close();
         }
