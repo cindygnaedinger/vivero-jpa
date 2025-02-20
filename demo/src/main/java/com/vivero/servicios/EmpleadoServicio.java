@@ -2,7 +2,6 @@ package com.vivero.servicios;
 
 import java.util.List;
 
-import com.vivero.entidades.Cliente;
 import com.vivero.entidades.Empleado;
 import com.vivero.persistencia.EmpleadoDAO;
 
