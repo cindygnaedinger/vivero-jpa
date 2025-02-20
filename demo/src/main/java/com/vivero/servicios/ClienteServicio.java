@@ -23,6 +23,12 @@ public class ClienteServicio {
             if(codigoPostal == null || codigoPostal.trim().isEmpty()) {
                 throw new IllegalArgumentException("El campo código postal no puede estar vacío.");
             }
+            if(fax == null || fax.trim().isEmpty()) {
+                throw new IllegalArgumentException("El campo fax no puede estar vacío.");
+            }
+            if(limiteCredito < 0) {
+                throw new IllegalArgumentException("El límite de crédito no puede ser negativo.");
+            }
             if(nombreCliente == null || nombreCliente.trim().isEmpty()) {
                 throw new IllegalArgumentException("El campo nombre del cliente no puede estar vacío.");
             }
@@ -78,7 +84,7 @@ public class ClienteServicio {
             }
             return cliente;
         } catch (Exception e) {
-            System.err.println("Error al buscar la oficina: "+e.getMessage());
+            System.err.println("Error al buscar el cliente: "+e.getMessage());
             return null;
         }
     }
