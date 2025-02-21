@@ -1,15 +1,10 @@
 package com.vivero.entidades;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "pago")
@@ -28,8 +23,8 @@ public class Pago {
     @Column(name = "id_transaccion")
     private String idTransaccion; 
 
-    @Column(name = "total")
-    private double total; 
+    @Column(name = "total", precision = 10, scale = 2)  // 10 dígitos en total, 2 decimales
+    private BigDecimal total;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
@@ -67,11 +62,11 @@ public class Pago {
         this.idTransaccion = idTransaccion;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
@@ -86,4 +81,5 @@ public class Pago {
     public Pago() {
     }
 }
+
 

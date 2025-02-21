@@ -67,7 +67,7 @@ public class PagoDAO {
         }
     }
     
-    public List<Pago> listarPagos() {
+    public List<Pago> buscarTodosLosPagos() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.createQuery("SELECT p FROM Pago p", Pago.class).getResultList();
