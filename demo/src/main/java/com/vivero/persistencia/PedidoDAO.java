@@ -68,7 +68,7 @@ public class PedidoDAO {
         }
     }
 
-    public List<Pedido> listarPedidos(){
+    public List<Pedido> buscarTodosLosPedidos(){
         EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.createQuery("SELECT pe FROM Pedido pe", Pedido.class).getResultList();
