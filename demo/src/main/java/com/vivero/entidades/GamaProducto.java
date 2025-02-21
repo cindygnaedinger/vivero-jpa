@@ -13,9 +13,6 @@ public class GamaProducto {
     @Column(name = "id_gama")
     private int idGama;
 
-    @Column(name = "descripcion_html")
-    private String descripcionHtml; 
-
     @Column(name = "descripcion_texto")
     private String descripcionTexto;
 
@@ -37,14 +34,6 @@ public class GamaProducto {
 
     public void setIdGama(int idGama) {
         this.idGama = idGama;
-    }
-
-    public String getDescripcionHtml() {
-        return descripcionHtml;
-    }
-
-    public void setDescripcionHtml(String descripcionHtml) {
-        this.descripcionHtml = descripcionHtml;
     }
 
     public String getDescripcionTexto() {

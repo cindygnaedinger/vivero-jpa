@@ -34,7 +34,7 @@ public class GamaProductoDAO {
         }
     }
 
-    public List<GamaProducto> obtenerTodasLasGamasProductos(){
+    public List<GamaProducto> buscarTodasLasGamasProductos(){
         EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.createQuery("SELECT g FROM GamaProducto g", GamaProducto.class).getResultList();
