@@ -49,7 +49,7 @@ public class PedidoServicio {
         } catch (IllegalArgumentException e) {
             System.err.println("Error de validación: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("No se guardó la nueva oficina de manera correcta: " + e.getMessage());
+            System.err.println("No se guardó el nuevo pedido de manera correcta: " + e.getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ public class PedidoServicio {
         try {
             Pedido pedido = daoPedido.buscarPedidoPorId(idPedido);
             if(pedido == null){
-                throw new Exception("No se encontró la oficina con ID: " + idPedido);
+                throw new Exception("No se encontró el pedido con ID: " + idPedido);
             }
             return pedido;
         } catch (Exception e) {

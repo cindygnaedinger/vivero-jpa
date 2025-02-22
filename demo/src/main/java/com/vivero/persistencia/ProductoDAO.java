@@ -68,7 +68,7 @@ public class ProductoDAO {
         }
     }
 
-    public List<Producto> listarProductos(){
+    public List<Producto> buscarTodosLosProductos(){
         EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.createQuery("SELECT pr FROM Producto pr", Producto.class).getResultList();
